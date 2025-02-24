@@ -270,9 +270,28 @@ class IntArray():
     def insert(self, index: int, val: int) -> None:
         '''
         Insert an element at index.
-        :param index:
-        :param val:
-        :return:
-
+        :param index: given index
+        :param val: value to be inserted to array
+        :return: None
         '''
+        # Check if index in range between 0 (start of an array ) and size of an array, which could be a maximum value for index
+        if not 0 <= index <= self._size:
+            raise TypeError('Index must be positive integer, not greater than array size')
+        #Increase array size by one
+        self._size += 1
+        #Allocates memory
+        new_resmem = ReservedMemory(self._size * self._bytes_per_element)
+        new_resmem.copy(self._resmem, count=self._size * self._bytes_per_element)
+        #Shift the values from given index one by one
+        for k in range(self._size - 2, index - 1, -1):
+            for byte_idx in range(self._bytes_per_element):
+                new_resmem[(k + 1) * self._bytes_per_element + byte_idx] = new_resmem[
+                    k * self._bytes_per_element + byte_idx]
+        #Insert a new value at the give nindex(bitwise operators)
+
+        for byte_idx in range(self._bytes_per_element):
+            new_resmem[index * self._bytes_per_element + byte_idx] = (val >> (8 * byte_idx)) & 255
+
         return
+
+
