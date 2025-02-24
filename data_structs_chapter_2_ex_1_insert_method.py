@@ -276,22 +276,29 @@ class IntArray():
         '''
         # Check if index in range between 0 (start of an array ) and size of an array, which could be a maximum value for index
         if not 0 <= index <= self._size:
-            raise TypeError('Index must be positive integer, not greater than array size')
+            raise IndexError
         #Increase array size by one
         self._size += 1
         #Allocates memory
         new_resmem = ReservedMemory(self._size * self._bytes_per_element)
-        new_resmem.copy(self._resmem, count=self._size * self._bytes_per_element)
+        if self._resmem:
+            new_resmem.copy(self._resmem)
+        self._resmem = new_resmem
         #Shift the values from given index one by one
-        for k in range(self._size - 2, index - 1, -1):
-            for byte_idx in range(self._bytes_per_element):
-                new_resmem[(k + 1) * self._bytes_per_element + byte_idx] = new_resmem[
-                    k * self._bytes_per_element + byte_idx]
-        #Insert a new value at the give nindex(bitwise operators)
-
-        for byte_idx in range(self._bytes_per_element):
-            new_resmem[index * self._bytes_per_element + byte_idx] = (val >> (8 * byte_idx)) & 255
-
+        for i in range(self._size - 2, index - 1, -1):
+            self.__setitem__(i + 1, self.__getitem__(i))
+        self.__setitem__(index, val)
         return
 
+def main():
+    array = IntArray()
+    for i in range(6):
+        array.append(i)
+    print(len(array))
 
+    array = IntArray()
+    for i in range(6):
+        array.append(i)
+    array.insert(5, 10)
+    print(array)
+main()
