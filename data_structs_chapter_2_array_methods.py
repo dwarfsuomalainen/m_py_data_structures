@@ -289,16 +289,31 @@ class IntArray():
             self.__setitem__(i + 1, self.__getitem__(i))
         self.__setitem__(index, val)
         return
+    def remove(self, index:int) -> int:
+        if not 0 <= index <= self._size:
+            raise IndexError
+        value_to_del = self.__getitem__(index)
+        #new_resmem = ReservedMemory((self._size - 1)* self._bytes_per_element)
+        for i in range (index, self._size - 1):
+            self.__setitem__(i, self.__getitem__(i + 1))
+        self.pop()
+        #if self._resmem:
+        #    new_resmem.copy(self._resmem)
+        #self._resmem = new_resmem
+        return value_to_del
 
 def main():
-    array = IntArray()
+    '''array = IntArray()
     for i in range(6):
         array.append(i)
-    print(len(array))
+    print(len(array))'''
 
     array = IntArray()
     for i in range(6):
         array.append(i)
-    array.insert(5, 10)
+    # array.insert(5, 10) ''' insert '''
+    val = array.remove(3)
+    print(val, array)
     print(array)
+    print(val)
 main()
