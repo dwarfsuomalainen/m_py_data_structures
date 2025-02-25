@@ -302,6 +302,19 @@ class IntArray():
         #self._resmem = new_resmem
         return value_to_del
 
+    def search(self, value):
+        """
+        Search method for the array
+
+        Parameters:
+        - 'value': value to search
+
+        Returns:
+          First index position where the value is found or -1 if not found
+        """
+
+        return
+
 def main():
     '''array = IntArray()
     for i in range(6):
@@ -312,8 +325,8 @@ def main():
     for i in range(6):
         array.append(i)
     # array.insert(5, 10) ''' insert '''
-    val = array.remove(3)
-    print(val, array)
+    # val = array.remove(3) ''' renove '''
+    #print(val, array) ''' remove '''
     print(array)
-    print(val)
+    #print(val)
 main()
