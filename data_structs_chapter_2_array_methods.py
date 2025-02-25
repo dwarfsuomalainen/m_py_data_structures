@@ -312,8 +312,10 @@ class IntArray():
         Returns:
           First index position where the value is found or -1 if not found
         """
-
-        return
+        for i in range(0, self._size):
+            #print(self.__getitem__(i))
+            if self.__getitem__(i) == value : return i
+        return -1
 
 def main():
     '''array = IntArray()
@@ -323,10 +325,12 @@ def main():
 
     array = IntArray()
     for i in range(6):
-        array.append(i)
+        array.append(i + i)
     # array.insert(5, 10) ''' insert '''
-    # val = array.remove(3) ''' renove '''
+    # val = array.remove(3) ''' remove '''
     #print(val, array) ''' remove '''
+
+    print(array.search(2))
     print(array)
     #print(val)
 main()
