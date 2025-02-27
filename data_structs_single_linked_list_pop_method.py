@@ -39,3 +39,10 @@ class SinglyLinkedList():
             while current_node.next != None:
                 current_node = current_node.next
             current_node.next = node
+    def pop(self):
+        if not self._head: return None
+        current_node = self._head
+        if not current_node.next:
+            self._head = None
+            return current_node.data
+
