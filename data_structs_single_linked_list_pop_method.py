@@ -42,7 +42,22 @@ class SinglyLinkedList():
     def pop(self):
         if not self._head: return None
         current_node = self._head
+        previous_node = None
         if not current_node.next:
             self._head = None
             return current_node.data
+        else:
+            while current_node.next != None:
+                previous_node = current_node
+                current_node = current_node.next
+            previous_node.next = None
+            data = current_node.data
+            return data
 
+def main():
+    list = SinglyLinkedList()
+    for i in 'abc':
+        list.append(i)
+    val = list.pop()
+    print(val, list)
+main()
