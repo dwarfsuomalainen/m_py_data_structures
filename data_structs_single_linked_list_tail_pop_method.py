@@ -47,3 +47,28 @@ class SinglyLinkedList():
 
         # Update list's size
         self._size += 1
+    def pop(self):
+        if not self._head: return None
+        if self._head == self._tail:
+            data = self._head.data
+            self._head = self._tail = None
+            self._size -= 1
+            return data
+        current_node = self._head
+        previous_node = None
+        while current_node.next:
+            previous_node = current_node
+            current_node = current_node.next
+        #data = current_node.value
+        self._tail = previous_node
+        previous_node.next = None
+        self._size -= 1
+        return current_node.data
+
+def main():
+    mylist = SinglyLinkedList()
+    for c in 'abc':
+        mylist.append(c)
+    val = mylist.pop()
+    print(val, mylist)
+main()
