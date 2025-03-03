@@ -47,6 +47,24 @@ class SinglyLinkedList():
 
         # Update list's size
         self._size += 1
+
+    def pop(self):
+        if not self._head: return None
+        current_node = self._head
+        self._tail = current_node
+        previous_node = None
+        if not current_node.next:
+            self._head = None
+            return current_node.data
+        else:
+            while current_node.next != None:
+                previous_node = current_node
+                current_node = current_node.next
+            previous_node.next = None
+            self._tail = previous_node
+            data = current_node.data
+            self._size -=1
+            return data
     def pop(self):
         if not self._head: return None
         if self._head == self._tail:
