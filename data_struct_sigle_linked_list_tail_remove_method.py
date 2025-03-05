@@ -156,3 +156,12 @@ class SinglyLinkedList():
         del(current_node)
         return data
 
+def main():
+    mylist = SinglyLinkedList()
+
+    for i in range(1, 6):
+        mylist.append(i * 10)
+
+    val = mylist.remove(2)
+    print(val, mylist)
+main()

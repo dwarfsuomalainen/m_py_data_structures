@@ -165,15 +165,45 @@ class DoublyLinkedList:
 
         Returns: None
         """
+        node_to_insert = ListNode(value)
 
-        # YOUR CODE HERE! Remove also next line if necessary
-        return
+        next_node = None
+        prev_node = None
+        counter = 0
+        if index > self._size: raise ValueError
 
-
-def main():
-    mylist = DoublyLinkedList()
-    for i in range(10, 51, 10):
-        mylist.append(i)
-    mylist.insert(0, 5)
-    print(mylist)
-main()
+        if self._size == 0:
+            self._head = node_to_insert
+            self._tail = node_to_insert
+            self._size += 1
+            return
+        if index == self._size:
+            # print("tail")
+            current_node = self._tail
+            # print(current_node.data)
+            node_to_insert.prev = current_node
+            # print(node_to_insert.prev)
+            current_node.next = node_to_insert
+            # print(current_node.next)
+            self._tail = node_to_insert
+            # print(self._tail)
+            self._size += 1
+            return
+        elif index == 0:
+            current_node = self._head
+            node_to_insert.next = current_node
+            self._head = node_to_insert
+            self._size += 1
+            return
+        else:
+            current_node = self._head
+            while counter < index:
+                current_node = current_node.next
+                counter += 1
+            prev_node = current_node.prev
+            node_to_insert.next = current_node
+            current_node.prev = node_to_insert
+            node_to_insert.prev = prev_node
+            prev_node.next = node_to_insert
+            self._size += 1
+        return None
