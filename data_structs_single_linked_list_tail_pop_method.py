@@ -63,7 +63,7 @@ class SinglyLinkedList():
         self._tail = previous_node
         previous_node.next = None
         self._size -= 1
-        return current_node.data
+        return current_node.data ### node to be removed with del() insisted in task
 
 def main():
     mylist = SinglyLinkedList()
