@@ -1,6 +1,3 @@
-from os import pread
-
-
 class ListNode:
     def __init__(self, data=None, next=None, prev=None):
         self.data = data
@@ -144,38 +141,48 @@ class DoublyLinkedList:
 
         Returns: None
         """
-        # Check if index is inside bounds
-        if index < 0 or index > self._size:
-            raise (ValueError('Index out of bounds'))
+        node_to_insert = ListNode(value)
 
-        # Prepare some variables to make the necessary changes
-        # The new node will be inserted between previous_node and next_node
-        previous_node = None
-        next_node = self._head
-        # Move to the given index and update pointer variables
-        for _ in range(index):
-            previous_node = next_node
-            next_node = next_node.next
+        next_node = None
+        prev_node = None
+        counter = 0
+        if index > self._size: raise ValueError
 
-        # Create new node with right value and pointers
-        new_node = ListNode(value, prev=previous_node, next=next_node)
-
-        # If insert at front, update head
-        if previous_node is None:
-            self._head = new_node
+        if self._size == 0:
+            self._head = node_to_insert
+            self._tail = node_to_insert
+            self._size += 1
+            return
+        if index == self._size:
+            # print("tail")
+            current_node = self._tail
+            # print(current_node.data)
+            node_to_insert.prev = current_node
+            # print(node_to_insert.prev)
+            current_node.next = node_to_insert
+            # print(current_node.next)
+            self._tail = node_to_insert
+            # print(self._tail)
+            self._size += 1
+            return
+        elif index == 0:
+            current_node = self._head
+            node_to_insert.next = current_node
+            self._head = node_to_insert
+            self._size += 1
+            return
         else:
-            # If not, update previous node
-            previous_node.next = new_node
-
-        # If insert at the end, update tail
-        if next_node is None:
-            self._tail = new_node
-        else:
-            # If not, update next node
-            next_node.prev = new_node
-
-        # Update list size
-        self._size += 1
+            current_node = self._head
+            while counter < index:
+                current_node = current_node.next
+                counter += 1
+            prev_node = current_node.prev
+            node_to_insert.next = current_node
+            current_node.prev = node_to_insert
+            node_to_insert.prev = prev_node
+            prev_node.next = node_to_insert
+            self._size += 1
+        return None
 
     def remove_by_value(self, value):
         """
@@ -289,12 +296,13 @@ class DoublyLinkedList:
             self._size -=1
             return data
 
-def main():
-    '''mylist = DoublyLinkedList()
+# main to test out .remove() method for doubly linked list
+'''def main():
+    ''''''mylist = DoublyLinkedList()
     #for i in range(10, 51, 10):
     #    mylist.append(i)
     val = mylist.remove(0)
-    print(val, mylist)'''
+    print(val, mylist)''''''
     mylist = DoublyLinkedList()
 
     try:
@@ -305,4 +313,13 @@ def main():
         print(f'Exception: {e}')
     else:
         print('No exception raised!')
-main()
+main()'''
+
+# main to test out .insert() method for doubly linked list
+'''def main():
+    mylist = DoublyLinkedList()
+    for i in range(10, 51, 10):
+        mylist.append(i)
+    val = mylist.insert(5, 999)
+    print(val, mylist)
+main()'''

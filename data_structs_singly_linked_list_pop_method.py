@@ -54,10 +54,11 @@ class SinglyLinkedList():
             data = current_node.data
             return data
 
-def main():
+# main to test out .pop() method for singly linked list
+'''def main():
     list = SinglyLinkedList()
     for i in 'abc':
         list.append(i)
     val = list.pop()
     print(val, list)
-main()
+main()'''

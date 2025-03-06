@@ -48,40 +48,22 @@ class SinglyLinkedList():
         self._size += 1
 
     def pop(self):
-        """
-        Removes the last node of the list
-
-        Parameters: None
-
-        Returns:
-            The content of the removed node. If list is empty, returns None
-        """
-        # If list is empty return None
-        if not self._size:
-            return None
-
-        # Locate previous_node (the node just before last node)
-        if self._size == 1:
-            previous_node = None
-        else:
-            previous_node = self._head
-            for _ in range(self._size - 1):
-                previous_node = previous_node.next
-
-        # If head is also last node, then update head
+        if not self._head: return None
         if self._head == self._tail:
-            self._head = None
-
-        # Save the content of the last node and remove it
-        value = self._tail.data
-        del (self._tail)
-
-        # Update tail
+            data = self._head.data
+            self._head = self._tail = None
+            self._size -= 1
+            return data
+        current_node = self._head
+        previous_node = None
+        while current_node.next:
+            previous_node = current_node
+            current_node = current_node.next
+        #data = current_node.value
         self._tail = previous_node
-
-        # Finally update size and return the value of the removed node
+        previous_node.next = None
         self._size -= 1
-        return value
+        return current_node.data ### node to be removed with del() insisted in task
 
     def insert(self, index, value):
         """
@@ -156,12 +138,20 @@ class SinglyLinkedList():
         del(current_node)
         return data
 
-def main():
+# main to test out .remove() method for singly linked list with tail
+'''def main():
     mylist = SinglyLinkedList()
 
     for i in range(1, 6):
         mylist.append(i * 10)
-
     val = mylist.remove(2)
     print(val, mylist)
-main()
+main()'''
+# main to test out .pop() method for singly linked list with tail
+'''def main():
+    mylist = SinglyLinkedList()
+    for c in 'abc':
+        mylist.append(c)
+    val = mylist.pop()
+    print(val, mylist)
+main()'''
