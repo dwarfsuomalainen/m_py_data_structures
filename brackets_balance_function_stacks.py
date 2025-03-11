@@ -18,36 +18,55 @@ Ok - 3
 from data_structs_stacks_push_pop_methods import Stack
 
 def check_balance(text):
-    print(text)
+    #print(text)
     pairs = 0
     stack_sym = Stack()
     position = 0
+    if not text:
+        print("Ok - 0")
+        return
     for symb in text:
-
+        '''if symb in (')', ']', '}') and position == 0:
+            print ("Match error at position 0")
+            return'''
         if symb in ('(','[','{'):
             #print(symb)
             to_push = (symb, position)
             stack_sym.push(to_push)
+            #print(stack_sym)
         if symb in (')', ']', '}'):
-            val = stack_sym.pop()
+            #print(symb)
             pairs += 1
-            #print(val)
-            #print('non bracket')
+            val = stack_sym.pop()
+            if not val:
+                print(f'Match error at position {position}')
+                return
+            if val[0] == '(' and symb != ')':
+                print(f"Match error at position {val[1] + 1}")
+                return
+
+            if val[0] == '[' and symb != ']':
+                print(f"Match error at position {val[1] + 1}")
+                return
+
+            if val[0] == '{' and symb != '}':
+                print(f"Match error at position {val[1] +1 }")
+                return
         position += 1
     if stack_sym.__len__() != 0:
-        position_to_print = stack_sym.pop()
-        print(position_to_print)
-        print(f"Match error at position {position_to_print [1]}")
+        print(f"Match error at position {position - 1}")
+        return
     else:
-        print(f"Ok - {pairs}")
-    #print(stack_sym.pop())
-
-    #print(stack_sym)
-
-
-
+        print (f"Ok - {pairs}")
+        return
 
 
 def main():
-    check_balance("a(b)c[d]e{f}g")
+    #check_balance("a(b)c[d]e{f}g")
+    #check_balance("a(b)c[)d]e{f}g")
+    #check_balance("a(b)(((c[d]e{f}g)))")
+    #check_balance("a(b)c(([d][e{f}])g)")
+    check_balance("a(b)c(([d][e{f}])g)(")
+    #check_balance("]a(b)c(([d][e{f}])g)")
+    #check_balance(abc)
 main()
