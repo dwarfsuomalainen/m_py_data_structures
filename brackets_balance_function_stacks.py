@@ -42,15 +42,21 @@ def check_balance(text):
                 print(f'Match error at position {position}')
                 return
             if val[0] == '(' and symb != ')':
-                print(f"Match error at position {val[1] + 1}")
+                print(val)
+                #print(f"Match error at position {val[1]}")
+                print(f"Match error at position {position}")
                 return
 
             if val[0] == '[' and symb != ']':
-                print(f"Match error at position {val[1] + 1}")
+                print(val)
+                #print(f"Match error at position {val[1]}")
+                print(f"Match error at position {position}")
                 return
 
             if val[0] == '{' and symb != '}':
-                print(f"Match error at position {val[1] +1 }")
+                print(val)
+                #print(f"Match error at position {val[1]}")
+                print(f"Match error at position {position}")
                 return
         position += 1
     if stack_sym.__len__() != 0:
@@ -63,10 +69,10 @@ def check_balance(text):
 
 def main():
     #check_balance("a(b)c[d]e{f}g")
-    #check_balance("a(b)c[)d]e{f}g")
+    check_balance("a(b)c[)d]e{f}g")
     #check_balance("a(b)(((c[d]e{f}g)))")
     #check_balance("a(b)c(([d][e{f}])g)")
-    check_balance("a(b)c(([d][e{f}])g)(")
+    #check_balance("a(b)c(([d][e{f}])g)")
     #check_balance("]a(b)c(([d][e{f}])g)")
     #check_balance(abc)
 main()
