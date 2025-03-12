@@ -69,10 +69,10 @@ def check_balance(text):
 
 def main():
     #check_balance("a(b)c[d]e{f}g")
-    check_balance("a(b)c[)d]e{f}g")
+    #check_balance("a(b)c[)d]e{f}g")
     #check_balance("a(b)(((c[d]e{f}g)))")
     #check_balance("a(b)c(([d][e{f}])g)")
-    #check_balance("a(b)c(([d][e{f}])g)")
+    check_balance("a(b)c(([d][e{f}]))g)((")
     #check_balance("]a(b)c(([d][e{f}])g)")
     #check_balance(abc)
 main()
