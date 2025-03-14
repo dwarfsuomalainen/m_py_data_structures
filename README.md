@@ -1,10 +1,7 @@
-
----
-
 # Data Structures and Methods  
 
 ## Description  
-This project implements fundamental data structures and their associated methods in Python. The current focus is on **Arrays** and **Linked Lists**, with additional structures and algorithms in progress.  
+This project implements fundamental data structures and their associated methods in Python. The current focus is on **Arrays**, **Linked Lists**, **Stacks**, and **Queues**, with additional structures and algorithms in progress.  
 
 ## Implemented Data Structures and Methods  
 
@@ -68,12 +65,72 @@ dll.remove(2)  # Removes element at index 2 (30)
 print(dll)  # Output: <DoublyLinkedList (2 elements): [10, 15]>
 ```
 
+### Stacks  
+```python
+from data_structs_stacks_push_pop_methods import Stack  
+
+stack = Stack()  
+stack.push(10)  
+stack.push(20)  
+stack.push(30)  
+
+popped_value = stack.pop()  # Removes and returns 30  
+print(popped_value)  # Output: 30  
+print(stack)  # Output: <Stack (2 elements): [20, 10]>
+```
+
+### Queues  
+
+#### **Node-Based Queue**  
+```python
+from data_structs_node_based_queue import Queue  
+
+queue = Queue()  
+queue.enqueue('A')  
+queue.enqueue('B')  
+queue.enqueue('C')  
+
+print(queue)  # Output: <Queue (3 elements): [A, B, C]>  
+
+val = queue.dequeue()  
+print(val, queue)  # Output: A <Queue (2 elements): [B, C]>  
+```
+
+#### **Stack-Based Queue**  
+Implemented using two stacks: an **inbound stack** (for enqueueing elements) and an **outbound stack** (for dequeuing elements).  
+
+```python
+from data_struct_stack_based_queue import StackBasedQueue  
+
+queue = StackBasedQueue()  
+queue.enqueue('A')  
+queue.enqueue('B')  
+queue.enqueue('C')  
+
+print(queue)  # Output: <StackBasedQueue (3 elements): [A, B, C]>  
+
+val = queue.dequeue()  
+print(val, queue)  # Output: A <StackBasedQueue (2 elements): [B, C]>  
+```
+
+### **Bracket Balance Checker**  
+```python
+from brackets_balance_function_stacks import check_balance  
+
+check_balance("a(b)c[d]e{f}g")  # Output: Ok - 3  
+check_balance("a(b)c[)d]e{f}g")  # Output: Match error at position 6  
+```
+
+### **Pairing Function Using Queue**  
+```python
+from data_structs_get_pairs_function_using_queue import get_pairs  
+
+pairs = get_pairs([74, 21, 18, 22, 71, 77, 82, 16, 77, 32, 90, 37, 98, 31, 59, 37, 99, 46, 28, 65])  
+print(pairs)  # Example Output: [(74, 21), (18, 71), (22, 77), ...]  
+```
+
 ## Upcoming Implementations  
 These structures and algorithms are planned for future development:  
-
-### Stacks and Queues  
-- **Stack**: `push()`, `pop()`, `peek()`, `is_empty()`  
-- **Queue**: `enqueue()`, `dequeue()`, `peek()`, `is_empty()`  
 
 ### Trees  
 - **Binary Search Tree (BST)**: `insert()`, `remove()`, `search()`, `traverse()`  
@@ -110,6 +167,4 @@ These structures and algorithms are planned for future development:
 - **Dynamic Programming** (e.g., `Fibonacci`, `Knapsack Problem`)  
 - **Greedy Algorithms** (e.g., `Activity Selection`, `Huffman Coding`)  
 - **Divide and Conquer**  
-
----
 
