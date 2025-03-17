@@ -69,5 +69,27 @@ class Tree():
         Returns:
         - The node that contains such data or None if data is not found
         """
-        pass
+        current_node = self._root_node
+        while current_node:
+            if current_node.data == data: print(current_node)
+            else: current_node = current_node._left_child
+            if current_node.data == data: print(current_node)
+            else:current_node = current_node._right_child
+            if current_node.data == data: print (current_node)
+
+
+
+def main():
+    tree = Tree()
+    tree.insert(50)
+    tree.insert(20)
+    tree.insert(70)
+    tree.insert(90)
+    tree.insert(10)
+    tree.insert(40)
+    tree.insert(30)
+    tree.insert(35)
+    print(tree._find(35))
+main()
+
 
