@@ -2,6 +2,8 @@
 Given a basic BST structure (included), add a _find() method to it, to search for values in the tree. The basic definition of the method is already included. Start from the root node and move to the appropriate nodes searching for the wanted value. The method should return the node that holds the value or None if the value is not found.
 
 Notice that the Node object, when printed, prints some odd code. This is done on purpose to help checking on the exercises.'''
+
+
 class Node():
     def __init__(self, data, parent_node=None, left_child=None, right_child=None):
         self.data = data
@@ -69,15 +71,38 @@ class Tree():
         Returns:
         - The node that contains such data or None if data is not found
         """
+        #set current node and parent node
         current_node = self._root_node
+        #iterate the tree
+        if not current_node: return None
         while current_node:
-            if current_node.data == data: print(current_node)
-            else: current_node = current_node._left_child
-            if current_node.data == data: print(current_node)
-            else:current_node = current_node._right_child
-            if current_node.data == data: print (current_node)
+            if current_node.data == data:
+                return current_node
+            #check if data smaller than node data, and reassign current node accordingly BST logic
+            elif current_node.data > data:
+                current_node = current_node._left_child
+                #print(current_node)
+            # check if data greater than node data, and reassign current node accordingly BST logic
+            elif current_node.data < data:
+                current_node = current_node._right_child
+                #print(current_node)
+        return None
 
 
+
+
+'''def main():
+    tree = Tree()
+    tree.insert(50)
+    tree.insert(20)
+    tree.insert(70)
+    tree.insert(90)
+    tree.insert(10)
+    tree.insert(40)
+    tree.insert(30)
+    tree.insert(35)
+    print(tree._find(35))
+main()'''
 
 def main():
     tree = Tree()
