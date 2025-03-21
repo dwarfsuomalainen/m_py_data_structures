@@ -73,6 +73,8 @@ class Tree():
         """
         #set current node and parent node
         current_node = self._root_node
+
+        
         #iterate the tree
         if not current_node: return None
         while current_node:
@@ -91,27 +93,23 @@ class Tree():
     def find_minimum(self):
         #set current node and parent node
         current_node = self._root_node
-        min_value = current_node.data
+        #print(current_node)
         #iterate the tree
-        if not current_node: return None
+        #if not current_node: return None
         while current_node:
-            #check if data smaller than node data, and reassign current node accordingly BST logic
-            if current_node.data > min_value :
-                min_value = min_value
-                current_node = current_node._left_child
-                print(current_node)
-            # check if data greater than node data, and reassign current node accordingly BST logic
-            elif current_node.data < min_value:
-                min_value = current_node
-                current_node = current_node._right_child
-                print(current_node)
-        return None
+            #print(current_node.data)
+            if not current_node._left_child: return current_node
+            else: current_node = current_node._left_child
+        return current_node
 
     def find_maximum(self):
-        """
-        Returns the maximum value of the tree
-        """
-        pass
+
+        current_node = self._root_node
+        while current_node:
+            #print(current_node.data)
+            if not current_node._right_child: return current_node
+            else: current_node = current_node._right_child
+        return current_node
 
 
 # main to test out ._find() method
@@ -141,8 +139,8 @@ def main():
     tree.insert(30)
     tree.insert(35)
     minimum = tree.find_minimum()
-    #maximum = tree.find_maximum()
-    print(minimum)
+    maximum = tree.find_maximum()
+    print(minimum, maximum)
 main()
 
 
