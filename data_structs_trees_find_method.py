@@ -112,6 +112,57 @@ class Tree():
         return current_node
 
 
+    def _detach_node(self, node):
+        """
+        Detach a node from the tree. Node to be detached has one child at most.
+        An error will be raised otherwise.
+        """
+        ### !!! REFACTOR THAT!!!!
+        current_node = self._root_node
+        parent_node = None
+        # case "root" to detach
+        if self._root_node == node:
+            if self._root_node._left_child == None and not self._root_node._right_child:
+                self._root_node = None
+                #print('single')
+                return
+            if self._root_node._left_child and self._root_node._right_child : return ValueError
+            else:
+                self._root_node = self._root_node._left_child or self._root_node._right_child
+                return
+        while current_node is not None:
+            if current_node is node:
+                parent_node = current_node._parent
+                # both children present
+                if current_node._left_child and current_node._right_child: return ValueError
+
+                child = current_node._left_child or current_node._right_child
+
+                if parent_node._left_child is current_node:
+                    parent_node._left_child = child
+                if parent_node._right_child is current_node:
+                    parent_node._right_child = child
+
+                if child:
+                    child._parent = parent_node
+                    return
+
+            # traverse tree
+            parent_node = current_node
+            if node.data < current_node.data:
+                #print('left')
+                current_node = current_node._left_child
+                #current_node._parent_node = parent_node
+            else:
+                #print('right')
+                current_node = current_node._right_child
+                #current_node._parent_node = parent_node
+
+
+
+
+
+
 # main to test out ._find() method
 '''def main():
     tree = Tree()
@@ -126,8 +177,8 @@ class Tree():
     print(tree._find(35))
 main()'''
 
-#main to test out .find_minimum() method
-def main():
+#main to test out .find_minimum() .find_maximum() method
+'''def main():
 
     tree = Tree()
     tree.insert(50)
@@ -141,6 +192,43 @@ def main():
     minimum = tree.find_minimum()
     maximum = tree.find_maximum()
     print(minimum, maximum)
-main()
+main()'''
 
+#main to test out ._detach_node(node)
+'''def main():
+    tree = Tree()
+    tree.insert(50)
+    tree.insert(20)
+    tree.insert(70)
+    tree.insert(90)
+    tree.insert(10)
+    tree.insert(40)
+    tree.insert(30)
+    tree.insert(35)
+    node = tree._find(40)
+    tree._detach_node(node)
+    print(tree._find(tree._root_node.data))
+main()'''
 
+'''def main():
+    tree = Tree()
+    tree.insert(50)
+    node = tree._find(50)
+    tree._detach_node(node)
+    print(tree._root_node)
+main()'''
+
+'''def main():
+    tree = Tree()
+    tree.insert(50)
+    tree.insert(20)
+    tree.insert(70)
+    tree.insert(90)
+    tree.insert(10)
+    tree.insert(40)
+    tree.insert(30)
+    tree.insert(35)
+    node = tree._find(35)
+    tree._detach_node(node)
+    print(tree._find(tree._root_node.data))
+main()'''
