@@ -119,7 +119,14 @@ class HashTable():
 
         Returns: The value of 'key' or alternative value
         """
-        pass
+        k = self._hash(key)
+        key_to_find = self._find_key(k, key)
+        #print(key_to_find)
+        if key_to_find is not None:
+            if self.slots[key_to_find].key == key:
+                return (self.slots[key_to_find].value)
+        else:
+            return (alternative)
 
 # main to test out ._find_free_slot function
 '''def main():
@@ -140,9 +147,25 @@ main()'''
     print(h.slots[229])
 main()'''
 
-#main to test out .get() function
-def main():
+#main to test out  .get() function
+'''def main():
     h = HashTable()
     h.put('Name', 'HashTable')
     print(h.get('Name'))
-main()
+main()'''
+
+'''def main():
+    h = HashTable()
+
+    s = "abcdefghijklmnopqrstuvwxyz"
+    for i in range(0, len(s) - 1, 2):
+        h.put(s[i:i + 2], s[i:i + 2])
+
+    for i in range(1, len(s) - 2, 2):
+        h.put(s[i:i + 2], s[i:i + 2])
+
+    print(h.get('ab'))
+    print(h.get('st'))
+    print(h.get('zz', 'Nothing'))
+    print(h.get('e', 'Nothing'))
+main()'''
