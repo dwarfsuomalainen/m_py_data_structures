@@ -63,7 +63,7 @@ class Queue():
         data = node_to_remove.data
         del node_to_remove
         self._size -= 1
-        print(data)
+        #print(data)
         return data
 
 

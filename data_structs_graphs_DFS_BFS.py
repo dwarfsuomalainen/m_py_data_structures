@@ -1,3 +1,6 @@
+from data_structs_node_based_queue import Queue
+
+
 class Vertex:
     def __init__(self, value):
         self._value = value
@@ -87,13 +90,43 @@ def DFS(graph, u, visited=None):
     """
     if visited is None:
         visited = {}
-
-    visited[u] = True
+    visited[u] = None if u not in visited else visited[u]
 
     for neighbor in graph.get_adjacent_vertices(u):
-        if not visited.get(neighbor):
+        if neighbor not in visited:
+            visited[neighbor] = u
             DFS(graph, neighbor, visited)
     return visited
+
+import queue
+def BFS(graph, start):
+    """
+    Perform Breadth-First Search of the graph starting from Vertex u.
+    """
+    queue = Queue()
+    queue.enqueue(start)
+    visited = {}
+    visited[start] = True
+    pre = {}
+    pre[start] = None
+    #to_return = {}
+
+
+    while queue._size != 0:
+        node = queue.dequeue()
+        for neighbor in graph._adj_map[node]:
+            if neighbor not in visited:
+                visited[neighbor] = True
+                pre[neighbor] = node
+                #to_return.update(neighbor)
+                queue.enqueue(neighbor)
+    return pre
+
+
+
+
+
+
 
 def main():
     A = Vertex('A')
@@ -119,7 +152,11 @@ def main():
         E: {C: CE, F: EF},
         F: {D: DF, E: EF}
     }
+    #DFS test
+    '''g = Graph(adj_map)
+    print(DFS(g, A))'''
 
+    #BFS test
     g = Graph(adj_map)
-    print(DFS(g, A))
+    print(BFS(g, A))
 main()
