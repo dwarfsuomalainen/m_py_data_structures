@@ -7,16 +7,17 @@ def insertion_sort(array):
 
     Returns: Nothing. The array is sorted in-place.
     """
-    if array[0] > array[1]:
+    if array[0] < array[1]:
         array[0], array[1] = array[1], array[0]
     print(array)
     while True:
-        for i in range(1, len(array) + 1):
+        for i in range(1, len(array) - 1):
             if array[i] > array[i + 1]:
                 array[i], array[i + 1] = array[i + 1], array[i]
 
 def main():
     array = [6, 8, 5, 1, 2]
+    print(array)
     insertion_sort(array)
     print(array)
 main()
